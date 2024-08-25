@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html lang="th,en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รับซ่อมของ</title>
+    <style>
+        html {
+            transform: scale(1.1);
+            transform-origin: 0 0;
+            width: 90%;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(27, 204, 195);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background-color: rgb(250, 209, 155);
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 50%; 
+            height: auto;
+        }
+
+        .inc {
+            margin: 0;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .menu {
+            background-color: antiquewhite;
+            overflow: hidden;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .menu li {
+            margin: 0 5px;
+        }
+
+        .menu li a {
+            display: block;
+            color: rgb(58, 58, 58);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu li a:hover {
+            background-color: #d4cfcf;
+        }
+
+        .carousel {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 8px;
+            z-index: 10;
+            overflow: hidden;
+            background-color: rgba(255, 0, 0, 0.3);
+            border: 2px solid blue;
+            height: 0;
+            padding-top: 20%; 
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .carousel-dot {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-dot.active {
+            background-color: #717171;
+        }
+
+        input#slide1:checked ~ .carousel-images {
+            transform: translateX(0%);
+        }
+
+        input#slide2:checked ~ .carousel-images {
+            transform: translateX(-100%);
+        }
+
+        input#slide3:checked ~ .carousel-images {
+            transform: translateX(-200%);
+        }
+
+        input#slide4:checked ~ .carousel-images {
+            transform: translateX(-300%);
+        }
+
+        input#slide1:checked ~ .carousel-dots label[for="slide1"],
+        input#slide2:checked ~ .carousel-dots label[for="slide2"],
+        input#slide3:checked ~ .carousel-dots label[for="slide3"],
+        input#slide4:checked ~ .carousel-dots label[for="slide4"] {
+            background-color: #717171;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        footer {
+            background-color: antiquewhite;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-content h3 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: rgb(19, 212, 203);
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: rgb(58, 58, 58);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: rgb(19, 212, 203);
+        }
+
+        .footer-content p {
+            margin: 5px 0;
+        }
+
+        .image-buttons-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+            z-index: 1;
+        }
+
+        .image-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 150px;
+            margin: 10px;
+            flex: 1 1 150px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #333;
+            margin-bottom: 10px;
+        }
+
+        .rectangle-button {
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgb(63, 255, 46);
+            color: #333;
+            text-align: center;
+            text-decoration: none;
+            border: 2px solid #333;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .rectangle-button:hover {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <img src="logo.png" alt="logo" class="logo">
+            <h1 class="inc">รับซ่อมหน้าแม่คุณ .inc</h1>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="#">หน้าแรก</a></li>
+                <li><a href="#">เกี่ยวกับเว็ปไซต์</a></li>
+                <li><a href="#">ติดต่อสอบถาม</a></li>
+                <li><a href="#">กฏการใช้งาน</a></li>
+                <li><a href="#">ลงชื่อเข้าใช้</a></li>
+                <li><a href="#">ข่าวสาร</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <input type="radio" name="carousel" id="slide1" checked>
+        <input type="radio" name="carousel" id="slide2">
+        <input type="radio" name="carousel" id="slide3">
+        <input type="radio" name="carousel" id="slide4">
+
+        <div class="carousel-images">
+            <div class="carousel-slide">
+                <img src="image1.jpg" alt="Slide 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="image1.jpg" alt="Slide 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="image1.jpg" alt="Slide 3">
+            </div>
+            <div class="carousel-slide">
+                <img src="image1.jpg" alt="Slide 4">
+            </div>
+        </div>
+
+        <div class="carousel-dots">
+            <label for="slide1" class="carousel-dot"></label>
+            <label for="slide2" class="carousel-dot"></label>
+            <label for="slide3" class="carousel-dot"></label>
+            <label for="slide4" class="carousel-dot"></label>
+        </div>
+    </div>
+
+    <div class="image-buttons-section">
+        <div class="image-box">
+            <img src="sample1.jpg" alt="Square 1">
+            <a href="coming soon.html" class="rectangle-button">ว่าจ้าง/รายะเอียด</a>
+        </div>
+        <div class="image-box">
+            <img src="sample1.jpg" alt="Square 2">
+            <a href="coming soon.html" class="rectangle-button">ว่าจ้าง/รายะเอียด</a>
+        </div>
+        <div class="image-box">
+            <img src="sample1.jpg" alt="Square 3">
+            <a href="coming soon.html" class="rectangle-button">ว่าจ้าง/รายะเอียด</a>
+        </div>
+        <div class="image-box">
+            <img src="sample1.jpg" alt="Square 4">
+            <a href="coming soon.html" class="rectangle-button">ว่าจ้าง/รายะเอียด</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>ติดต่อเรา</h3>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <p>© 2024 รับซ่อมหน้าแม่คุณ .inc</p>
+        </div>
+    </footer>
+</body>
+</html>
